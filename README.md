@@ -6,7 +6,7 @@ This code will probably have very little application to the real world, but it i
 
 ## Organization
 
-The labs will be organized into chapters, ex. `ch01` and `ch02` with a file called `assignment.md` to explain the problems assigned. This class includes pseudo-code interviews and lab writeups that will help explain the functionality of the code. Each will be labeled according to the corresponding lab, ex. `lab01-writeup.md` and `lab02-writeup.md`.
+The labs will be organized into labs, ex. `datalab` and `bomblab`. Each of the assignments are explained in the `README.md` file included in each lab.
 
 
 ## About the class
