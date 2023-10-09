@@ -1,0 +1,130 @@
+Reading symbols from bomb...
+(gdb) b phase_6
+Breakpoint 1 at 0x187b
+(gdb) b explode_bomb
+Breakpoint 2 at 0x1ce5
+(gdb) r solution.txt
+Starting program: /home/jovyan/lab2-bomblab-rey-h/bomb238/bomb solution.txt
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+Halfway there!
+So you got that one.  Try this one.
+Good work!  On to the next...
+1 2 3 4 5 6
+
+Breakpoint 1, 0x000055555555587b in phase_6 ()
+(gdb) disas
+Dump of assembler code for function phase_6:
+=> 0x000055555555587b <+0>:     endbr64 
+   0x000055555555587f <+4>:     push   %r14
+   0x0000555555555881 <+6>:     push   %r13
+   0x0000555555555883 <+8>:     push   %r12
+   0x0000555555555885 <+10>:    push   %rbp
+   0x0000555555555886 <+11>:    push   %rbx
+   0x0000555555555887 <+12>:    sub    $0x50,%rsp
+   0x000055555555588b <+16>:    lea    0x30(%rsp),%r13
+   0x0000555555555890 <+21>:    mov    %r13,%rsi
+   0x0000555555555893 <+24>:    call   0x555555555d32 <read_six_numbers>
+   0x0000555555555898 <+29>:    mov    $0x1,%r14d
+   0x000055555555589e <+35>:    mov    %r13,%r12
+   0x00005555555558a1 <+38>:    jmp    0x5555555558cb <phase_6+80>
+   0x00005555555558a3 <+40>:    call   0x555555555ce5 <explode_bomb>
+   0x00005555555558a8 <+45>:    jmp    0x5555555558da <phase_6+95>
+   0x00005555555558aa <+47>:    add    $0x1,%rbx
+   0x00005555555558ae <+51>:    cmp    $0x5,%ebx
+   0x00005555555558b1 <+54>:    jg     0x5555555558c3 <phase_6+72>
+   0x00005555555558b3 <+56>:    mov    (%r12,%rbx,4),%eax
+   0x00005555555558b7 <+60>:    cmp    %eax,0x0(%rbp)
+   0x00005555555558ba <+63>:    jne    0x5555555558aa <phase_6+47>
+   0x00005555555558bc <+65>:    call   0x555555555ce5 <explode_bomb>
+   0x00005555555558c1 <+70>:    jmp    0x5555555558aa <phase_6+47>
+   0x00005555555558c3 <+72>:    add    $0x1,%r14
+   0x00005555555558c7 <+76>:    add    $0x4,%r13
+   0x00005555555558cb <+80>:    mov    %r13,%rbp
+   0x00005555555558ce <+83>:    mov    0x0(%r13),%eax
+   0x00005555555558d2 <+87>:    sub    $0x1,%eax
+   0x00005555555558d5 <+90>:    cmp    $0x5,%eax
+   0x00005555555558d8 <+93>:    ja     0x5555555558a3 <phase_6+40>
+   0x00005555555558da <+95>:    cmp    $0x5,%r14d
+   0x00005555555558de <+99>:    jg     0x5555555558e5 <phase_6+106>
+   0x00005555555558e0 <+101>:   mov    %r14,%rbx
+   0x00005555555558e3 <+104>:   jmp    0x5555555558b3 <phase_6+56>
+   0x00005555555558e5 <+106>:   mov    $0x0,%esi
+   0x00005555555558ea <+111>:   mov    0x30(%rsp,%rsi,4),%ecx
+   0x00005555555558ee <+115>:   mov    $0x1,%eax
+   0x00005555555558f3 <+120>:   lea    0x3d36(%rip),%rdx        # 0x555555559630 <node1>
+   0x00005555555558fa <+127>:   cmp    $0x1,%ecx
+   0x00005555555558fd <+130>:   jle    0x55555555590a <phase_6+143>
+   0x00005555555558ff <+132>:   mov    0x8(%rdx),%rdx
+   0x0000555555555903 <+136>:   add    $0x1,%eax
+   0x0000555555555906 <+139>:   cmp    %ecx,%eax
+   0x0000555555555908 <+141>:   jne    0x5555555558ff <phase_6+132>
+   0x000055555555590a <+143>:   mov    %rdx,(%rsp,%rsi,8)
+   0x000055555555590e <+147>:   add    $0x1,%rsi
+   0x0000555555555912 <+151>:   cmp    $0x6,%rsi
+   0x0000555555555916 <+155>:   jne    0x5555555558ea <phase_6+111>
+   0x0000555555555918 <+157>:   mov    (%rsp),%rbx
+   0x000055555555591c <+161>:   mov    0x8(%rsp),%rax
+   0x0000555555555921 <+166>:   mov    %rax,0x8(%rbx)
+   0x0000555555555925 <+170>:   mov    0x10(%rsp),%rdx
+   0x000055555555592a <+175>:   mov    %rdx,0x8(%rax)
+   0x000055555555592e <+179>:   mov    0x18(%rsp),%rax
+   0x0000555555555933 <+184>:   mov    %rax,0x8(%rdx)
+   0x0000555555555937 <+188>:   mov    0x20(%rsp),%rdx
+   0x000055555555593c <+193>:   mov    %rdx,0x8(%rax)
+   0x0000555555555940 <+197>:   mov    0x28(%rsp),%rax
+   0x0000555555555945 <+202>:   mov    %rax,0x8(%rdx)
+   0x0000555555555949 <+206>:   movq   $0x0,0x8(%rax)
+--Type <RET> for more, q to quit, c to continue without paging--c
+   0x0000555555555951 <+214>:   mov    $0x5,%ebp
+   0x0000555555555956 <+219>:   jmp    0x555555555961 <phase_6+230>
+   0x0000555555555958 <+221>:   mov    0x8(%rbx),%rbx
+   0x000055555555595c <+225>:   sub    $0x1,%ebp
+   0x000055555555595f <+228>:   je     0x555555555972 <phase_6+247>
+   0x0000555555555961 <+230>:   mov    0x8(%rbx),%rax
+   0x0000555555555965 <+234>:   mov    (%rax),%eax
+   0x0000555555555967 <+236>:   cmp    %eax,(%rbx)
+   0x0000555555555969 <+238>:   jge    0x555555555958 <phase_6+221>
+   0x000055555555596b <+240>:   call   0x555555555ce5 <explode_bomb>
+   0x0000555555555970 <+245>:   jmp    0x555555555958 <phase_6+221>
+   0x0000555555555972 <+247>:   add    $0x50,%rsp
+   0x0000555555555976 <+251>:   pop    %rbx
+   0x0000555555555977 <+252>:   pop    %rbp
+   0x0000555555555978 <+253>:   pop    %r12
+   0x000055555555597a <+255>:   pop    %r13
+   0x000055555555597c <+257>:   pop    %r14
+   0x000055555555597e <+259>:   ret    
+End of assembler dump.
+(gdb) x/12gx 0x555555559630
+0x555555559630 <node1>: 0x00000001000003db      0x0000555555559640
+0x555555559640 <node2>: 0x000000020000007b      0x0000555555559650
+0x555555559650 <node3>: 0x000000030000018e      0x0000555555559660
+0x555555559660 <node4>: 0x00000004000003b8      0x0000555555559670
+0x555555559670 <node5>: 0x00000005000001a9      0x0000555555559120
+0x555555559680 <host_table>:    0x0000555555557435      0x000055555555744f
+
+# Top displays the node values and their addresses. Since there is no null pointer at then end, we can grab that node by putting in the address.
+
+
+(gdb) x/x 0x0000555555559120
+0x555555559120 <node6>: 0x000000060000025f
+
+
+1 2 3 4 5 6
+
+1 2 
+
+1 | 3db
+2 | 07b
+3 | 18e
+4 | 3b8
+5 | 1a9
+6 | 25f
+
+Since this is comparing it if it's greater or equal than, we need the biggest node first to the smallest.
+
+So order goes: 1 4 6 5 3 2

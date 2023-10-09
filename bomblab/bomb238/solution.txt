@@ -1,0 +1,11 @@
+Premature abstraction is an equally grevious sin as premature optimization.
+
+0 1 1 2 3 5
+
+1 m 307
+
+24 2
+
+kkkkkm
+
+1 4 6 5 3 2
