@@ -8,6 +8,23 @@ This code will probably have very little application to the real world, but it i
 
 The labs will be organized into labs, ex. `datalab` and `bomblab`. Each of the assignments are explained in the `README.md` file included in each lab.
 
+## About the labs
+
+### datalab
+
+Bit level representations of integers and floating point numbers
+
+### bomblab
+
+Exploring Aseembly and how memory and registers operate through decoding and diffusing a binary bomb.
+
+### attacklab
+
+Exploiting security vulnerabilities of programs through buffer overflow attacks.
+
+### perflab
+
+Trying to increase performance optimization of memory intensive code.
 
 ## About the class
 
