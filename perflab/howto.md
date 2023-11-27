@@ -33,19 +33,19 @@ basically, a function is compiled into the calling program which eliminates the 
 eliminating calls to functions reduces CPE because if the function is called every time the loop iterates, it makes unecessary memory references that can be eliminated if the call is made outside of the loop.
 
 
-#### why would `char` improve over `int` in an array?
+### why would `char` improve over `int` in an array?
 
 char contains only 1 byte of memory and we are only using RGB color values which only go to 255 anyways. making the data types smaller would reduce the amount of memory used.
 
 
-#### why does loop order impact stride (step size)?
+### why does loop order impact stride (step size)?
 
 loop stride is essentially just the setp size used when iterating over a sequence of elements.
 
 the step size is important because the more times you can step inside an iteration, the faster the program can compile.
 
 
-#### what is the stride for the inner loop?
+### what is the stride for the inner loop?
 
 ```
   for(int col = 1; col < (input -> width) - 1; col = col + 1) {
@@ -69,7 +69,7 @@ the stride for the inner loop is 1 because both `i` and `j` are being incremente
 if it were more than 1, the indexing expression would be different.
 
 
-#### why does unrolling help? how does it work for different unrolling amounts?
+### why does unrolling help? how does it work for different unrolling amounts?
 
 unrolling improves pipelining (improves overall efficiency), register calls (reduces need for memory accessees), and cache performance (reducing iterations imporves data access patterns).
 
@@ -96,11 +96,11 @@ for (int i = 0; i < N; i+=4)
 }
 ```
 
-#### why does optimization help?
+### why does optimization help?
 
 program go quick = more time for coffee.
 
 
-#### how do multiple accumulators help?
+### how do multiple accumulators help?
 
 multiple accumulators can help by storing "intermediate" values of a computation within a loop / iterative process.
