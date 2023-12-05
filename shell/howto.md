@@ -8,12 +8,12 @@ the `fork()` function creates a new child process from the parent process. it wi
 
 #### what happens when exec fails?
 
-`execv()` is used to load and run a program. `execve()` is about the same, but instead it requires a list of environment variables which points to a null-terminated array of pointers to environment variable strings formatted as *name=value*.
+`execv()` is used to load and run a program. `execve()` is about the same, but instead it requires a list of environment variables which points to a null-terminated array of pointers to environment variable strings formatted as *name=value*. it calls once and never returns.
 
 when `execve()` fails, it could be because:
-1. the specified file does not exist
+1. the specified file does not exist / couldn't find the file
 2. the process does not have permission to execute the specified file
-3. the specified file is not a recognized exec. format
+3. the specified file is not a recognized exe format
 4. the file specified in `filename` has bad permissions
 
 
@@ -46,7 +46,7 @@ for this lab, the jobs are managed and modified in the `jobs.cc` file. some of t
 when implementing these functions, the arguments needed for some of the function are the job pid or the pointer to the joblist.
 
 this is needed because jobs help manage and control execution processes within a program and provide things like:
-* backgroudn processing
+* background processing
 * process control (starting, stopping, and queueing processes)
 * error handling
 
@@ -54,6 +54,8 @@ this is needed because jobs help manage and control execution processes within a
 #### what is race condition and how do you fix it?
 
 race condition is a classic synchronization error that occurs when the program is dependent on the relative timing of events or interleaving of operations. this can cause the program ot produce incorrect or unexpected results.
+
+e.g. say you have a function `addjob()` and `deletejob()`, and `deletejob()` is called before `addjob()` because of the incorrect timing of operations. that is race condition.
 
 
 ### SIGTSTP
@@ -129,4 +131,4 @@ if ctrl-c is pressed to interrupt a process, then the signal SIGINT is invoked a
 
 #### how are the child states updated if the user presses ctrl-z?
 
-if ctrl-z is pressed to interrupt a child process, the signal SIGTSTP is raised and the processes is changed into a STOPPED state. 
+if ctrl-z is pressed to stop a child process, the signal SIGTSTP is raised and the processes is changed into a STOPPED state.

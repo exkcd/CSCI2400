@@ -30,8 +30,6 @@ Trying to increase performance optimization of memory intensive code.
 
 Making a tiny shell by utilizing processes and signals.
 
----
-
 ## About the class
 
 This class is the CSCI2400 Computing Systems class at the University of Colorado Boulder. The book being used is:
