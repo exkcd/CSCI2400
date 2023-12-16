@@ -12,7 +12,7 @@ The labs will be organized into labs, ex. `datalab` and `bomblab`. Each of the a
 
 ### datalab
 
-Bit level representations of integers and floating point numbers
+Bit level representations of integers and floating point numbers.
 
 ### bomblab
 
@@ -29,6 +29,10 @@ Trying to increase performance optimization of memory intensive code.
 ### shell lab
 
 Making a tiny shell by utilizing processes and signals.
+
+### malloc lab
+
+A dynamic memory allocator.
 
 ## About the class
 
